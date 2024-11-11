@@ -4,8 +4,8 @@ from selenium.webdriver.common.by import By
 from behave import given, when, then
 from time import sleep
 
-EMAIL = '<LOGIN EMAIL>'
-PASSWORD = '<PASSWORD>'
+EMAIL = 'rafa.yamashiro@gmail.com'
+PASSWORD = '7huNderb0!t'
 EMAIL_INPUT = (By.ID, 'email-2')
 PASSWORD_INPUT = (By.ID, 'field')
 LOGIN_BTN = (By.CSS_SELECTOR, '.login-button')
