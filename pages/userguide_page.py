@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.webdriver.common.by import By
 from pages.base_page import Page
 
@@ -9,9 +11,10 @@ class UserGuidePage(Page):
     VIDEO_TITLE = (By.CSS_SELECTOR, '.chatbot-text-h1')
 
     def click_userguide(self):
-        self.click(self.USER_GUIDE_BTN)
+        self.click(*self.USER_GUIDE_BTN)
 
     def verify_userguide_page(self):
+        sleep(2)
         self.wait_for_element_to_appear(*self.USER_GUIDE_PAGE_TITLE)
 
     def verify_video_block_title(self):

@@ -49,6 +49,9 @@ class Page:
             message=f'Element by {locator} did not appear'
         )
 
+    def wait_for_url(self, url):
+        self.wait.until(EC.url_to_be(url))
+
     def wait_for_element_to_disappear(self, *locator):
         self.wait.until(
             EC.invisibility_of_element_located(locator),
