@@ -12,10 +12,18 @@ def browser_init(context, scenario_name):
     """
     :param context: Behave context
     """
-    driver_path = ChromeDriverManager().install()
-    service = Service(driver_path)
-    context.driver = webdriver.Chrome(service=service)
 
+    ## CHROME MOBILE ##
+    # mobile_emulation = {"deviceName": "Nexus 5"}
+    # chrome_options = webdriver.ChromeOptions()
+    # chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    #
+    ## CHROME ##
+    # driver_path = ChromeDriverManager().install()
+    # service = Service(driver_path)
+    # context.driver = webdriver.Chrome(service=service, options=chrome_options)
+
+    ## FIREFOX ##
     # driver_path = GeckoDriverManager().install()
     # service = Service(driver_path)
     # context.driver = webdriver.Firefox(service=service)
@@ -32,21 +40,27 @@ def browser_init(context, scenario_name):
     # context.driver = webdriver.Firefox(options=options, service=Service(GeckoDriverManager().install()))
 
     ### BROWSERSTACK ###
-    # bs_user = 'rafael_CviRzZ'
-    # bs_key = 'WEjXeF8rCuQHUa9BHAd8'
-    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-    # options = Options()
+    bs_user = 'rafael_CviRzZ'
+    bs_key = 'WEjXeF8rCuQHUa9BHAd8'
+    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    options = Options()
     # bstack_options = {
     #     "os": "OS X",
     #     "osVersion": "Sequoia",
     #     'browserName': 'Safari',
     #     'sessionName': scenario_name,
     # }
-    # options.set_capability('bstack:options', bstack_options)
-    # context.driver = webdriver.Remote(command_executor=url, options=options)
+    bstack_options = {
+        "deviceName": "iPhone 12 Pro",
+        "osVersion": "18",
+        'browserName': 'safari',
+        'sessionName': scenario_name,
+    }
+    options.set_capability('bstack:options', bstack_options)
+    context.driver = webdriver.Remote(command_executor=url, options=options)
 
 
-    context.driver.maximize_window()
+    #context.driver.maximize_window()
     context.driver.implicitly_wait(4)
 
     context.driver.wait = WebDriverWait(context.driver, 15)
